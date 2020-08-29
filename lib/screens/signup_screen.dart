@@ -22,6 +22,25 @@ class _SignupScreenState extends State<SignupScreen> {
     'password':''
   };
 
+  void _confirmationSign(String msg)
+  {
+    showDialog(context: context,
+    builder: (ctx)=>AlertDialog(
+      title: Text('Confirmation'),
+      content: Text(msg),
+      actions: <Widget>[
+        FlatButton(
+          child: Text('Proceed'),
+          onPressed: (){
+            Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+          }
+          ),
+      ],
+    )
+
+    );
+  }
+
   void _showErrorDialog(String msg)
   {
     showDialog(context: context,
@@ -53,7 +72,8 @@ class _SignupScreenState extends State<SignupScreen> {
           _authData['email'],
           _authData['password']
       );
-      Navigator.of(context).pushReplacementNamed(HomePage.routeName);
+      var successMsg="You are succesfully registered!";
+      _confirmationSign(successMsg);
     }catch(error)
     {
       var errorMessage='Authentication failed try again later';
